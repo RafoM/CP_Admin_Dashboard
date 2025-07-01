@@ -12,6 +12,7 @@ import PeopleIcon from '@mui/icons-material/People';
 import PaymentIcon from '@mui/icons-material/Payment';
 import ShareIcon from '@mui/icons-material/Share';
 import SettingsIcon from '@mui/icons-material/Settings';
+import CurrencyBitcoinIcon from '@mui/icons-material/CurrencyBitcoin';
 import './Sidebar.scss';
 
 const drawerWidth = 240;
@@ -24,6 +25,7 @@ const navItems = [
   { to: '/settings', label: 'Settings', icon: <SettingsIcon /> },
   { to: '/mnemonics', label: 'Mnemonics', icon: <DashboardIcon /> },
   { to: '/blockchains', label: 'Blockchains', icon: <PaymentIcon /> },
+  { to: '/cryptocurrencies', label: 'Cryptocurrencies', icon: <CurrencyBitcoinIcon /> },
 ];
 
 const Sidebar = () => (

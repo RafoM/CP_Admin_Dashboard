@@ -12,6 +12,7 @@ import Referrals from '../pages/Referrals';
 import Settings from '../pages/Settings';
 import Mnemonics from '../pages/Mnemonics';
 import Blockchains from '../pages/Blockchains';
+import Cryptocurrencies from '../pages/Cryptocurrencies';
 import './Layout.scss';
 
 const drawerWidth = 240;
@@ -32,6 +33,7 @@ const Layout = () => {
           <Route path="/settings" element={<Settings />} />
           <Route path="/mnemonics" element={<Mnemonics />} />
           <Route path="/blockchains" element={<Blockchains />} />
+          <Route path="/cryptocurrencies" element={<Cryptocurrencies />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         <Outlet />
