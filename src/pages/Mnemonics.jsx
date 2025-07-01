@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -10,41 +9,30 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import AddMnemonicModal from '../components/modals/AddMnemonicModal';
 import {
   fetchMnemonicsRequest,
-  createMnemonicRequest,
 } from '../redux/slices/mnemonicsSlice';
 
 const Mnemonics = () => {
   const dispatch = useDispatch();
   const { list } = useSelector(state => state.mnemonics);
   const loading = useSelector(state => state.ui.loading);
-  const [name, setName] = useState('');
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     dispatch(fetchMnemonicsRequest());
   }, [dispatch]);
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    if (!name) return;
-    dispatch(createMnemonicRequest({ name }));
-    setName('');
-  };
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <>
       <Typography variant="h4" gutterBottom>Mnemonics</Typography>
-      <form onSubmit={handleSubmit} style={{ marginBottom: '1rem' }}>
-        <TextField
-          label="Name"
-          value={name}
-          onChange={e => setName(e.target.value)}
-          size="small"
-          sx={{ mr: 1 }}
-        />
-        <Button variant="contained" type="submit" disabled={loading}>Add</Button>
-      </form>
+      <Button variant="contained" onClick={handleOpen} sx={{ mb: 2 }} disabled={loading}>
+        Add
+      </Button>
       <TableContainer component={Paper}>
         <Table size="small">
           <TableHead>
@@ -63,6 +51,7 @@ const Mnemonics = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      <AddMnemonicModal open={open} onClose={handleClose} />
     </>
   );
 };
