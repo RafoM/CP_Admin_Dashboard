@@ -22,6 +22,8 @@ const navItems = [
   { to: '/payments', label: 'Payments', icon: <PaymentIcon /> },
   { to: '/referrals', label: 'Referrals', icon: <ShareIcon /> },
   { to: '/settings', label: 'Settings', icon: <SettingsIcon /> },
+  { to: '/mnemonics', label: 'Mnemonics', icon: <DashboardIcon /> },
+  { to: '/blockchains', label: 'Blockchains', icon: <PaymentIcon /> },
 ];
 
 const Sidebar = () => (
