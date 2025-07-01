@@ -30,12 +30,12 @@ const Layout = () => {
           <Route path="/" element={<Dashboard />} />
           <Route path="/users" element={<Users />} />
           <Route path="/payments" element={<Payments />} />
-          <Route path="/payment-methods" element={<PaymentMethods />} />
           <Route path="/referrals" element={<Referrals />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/mnemonics" element={<Mnemonics />} />
           <Route path="/blockchains" element={<Blockchains />} />
           <Route path="/cryptocurrencies" element={<Cryptocurrencies />} />
+          <Route path="/payment-methods" element={<PaymentMethods />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         <Outlet />
