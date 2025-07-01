@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import LinearProgress from '@mui/material/LinearProgress';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -30,6 +31,7 @@ const Mnemonics = () => {
   return (
     <>
       <Typography variant="h4" gutterBottom>Mnemonics</Typography>
+      {loading && <LinearProgress sx={{ mb: 2 }} />}
       <Button variant="contained" onClick={handleOpen} sx={{ mb: 2 }} disabled={loading}>
         Add
       </Button>

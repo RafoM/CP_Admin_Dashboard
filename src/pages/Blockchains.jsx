@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Typography from '@mui/material/Typography';
 import Switch from '@mui/material/Switch';
 import Button from '@mui/material/Button';
+import LinearProgress from '@mui/material/LinearProgress';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -46,6 +47,7 @@ const Blockchains = () => {
   return (
     <>
       <Typography variant="h4" gutterBottom>Blockchains</Typography>
+      {loading && <LinearProgress sx={{ mb: 2 }} />}
       <Button variant="contained" onClick={handleOpen} sx={{ mb: 2 }} disabled={loading}>
         Add
       </Button>
