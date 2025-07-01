@@ -3,6 +3,7 @@ import authSaga from './authSaga';
 import usersSaga from './usersSaga';
 import mnemonicsSaga from './mnemonicsSaga';
 import blockchainsSaga from './blockchainsSaga';
+import cryptocurrenciesSaga from './cryptocurrenciesSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -10,5 +11,6 @@ export default function* rootSaga() {
     usersSaga(),
     mnemonicsSaga(),
     blockchainsSaga(),
+    cryptocurrenciesSaga(),
   ]);
 }
