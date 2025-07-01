@@ -4,7 +4,6 @@ import {
   fetchMnemonicsRequest,
   createMnemonicRequest,
   setMnemonics,
-  addMnemonic,
   setMnemonicsError,
 } from '../redux/slices/mnemonicsSlice';
 import { setLoading } from '../redux/slices/uiSlice';
@@ -24,8 +23,9 @@ function* handleFetchMnemonics() {
 function* handleCreateMnemonic(action) {
   try {
     yield put(setLoading(true));
-    const { data } = yield call(createMnemonic, action.payload);
-    yield put(addMnemonic(data));
+    yield call(createMnemonic, action.payload);
+    const { data } = yield call(getMnemonics);
+    yield put(setMnemonics(data));
   } catch (err) {
     yield put(setMnemonicsError(err.message));
   } finally {
