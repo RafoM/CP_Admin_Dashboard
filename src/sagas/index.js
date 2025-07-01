@@ -4,6 +4,7 @@ import usersSaga from './usersSaga';
 import mnemonicsSaga from './mnemonicsSaga';
 import blockchainsSaga from './blockchainsSaga';
 import cryptocurrenciesSaga from './cryptocurrenciesSaga';
+import paymentMethodsSaga from './paymentMethodsSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -12,5 +13,6 @@ export default function* rootSaga() {
     mnemonicsSaga(),
     blockchainsSaga(),
     cryptocurrenciesSaga(),
+    paymentMethodsSaga(),
   ]);
 }

@@ -21,6 +21,7 @@ const navItems = [
   { to: '/', label: 'Dashboard', icon: <DashboardIcon />, end: true },
   { to: '/users', label: 'Users', icon: <PeopleIcon /> },
   { to: '/payments', label: 'Payments', icon: <PaymentIcon /> },
+  { to: '/payment-methods', label: 'Payment Methods', icon: <PaymentIcon /> },
   { to: '/referrals', label: 'Referrals', icon: <ShareIcon /> },
   { to: '/settings', label: 'Settings', icon: <SettingsIcon /> },
   { to: '/mnemonics', label: 'Mnemonics', icon: <DashboardIcon /> },
