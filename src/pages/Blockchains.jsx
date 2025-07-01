@@ -41,16 +41,18 @@ const Blockchains = () => {
 
   const handleUpdate = () => {
     if (!edit) return;
-    dispatch(
-      updateBlockchainRequest({
-        id: edit.id,
-        name: edit.name,
-        symbol: edit.symbol,
-        wallet_generation_supported: edit.wallet_generation_supported,
-      }),
-    );
-    setEdit(null);
-    setSnack({ open: true, message: 'Blockchain updated' });
+    if (window.confirm('Save changes to this blockchain?')) {
+      dispatch(
+        updateBlockchainRequest({
+          id: edit.id,
+          name: edit.name,
+          symbol: edit.symbol,
+          wallet_generation_supported: edit.wallet_generation_supported,
+        }),
+      );
+      setEdit(null);
+      setSnack({ open: true, message: 'Blockchain updated' });
+    }
   };
 
   const handleDelete = id => {

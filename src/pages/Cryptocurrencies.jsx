@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import LinearProgress from '@mui/material/LinearProgress';
+import Snackbar from '@mui/material/Snackbar';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -28,6 +29,7 @@ const Cryptocurrencies = () => {
   const loading = useSelector(state => state.ui.loading);
   const [open, setOpen] = useState(false);
   const [edit, setEdit] = useState(null);
+  const [snack, setSnack] = useState({ open: false, message: '' });
 
   useEffect(() => {
     dispatch(fetchCryptocurrenciesRequest());
@@ -38,8 +40,18 @@ const Cryptocurrencies = () => {
 
   const handleUpdate = () => {
     if (!edit) return;
-    dispatch(updateCryptocurrencyRequest({ id: edit.id, name: edit.name, symbol: edit.symbol }));
-    setEdit(null);
+    if (window.confirm('Save changes to this cryptocurrency?')) {
+      dispatch(updateCryptocurrencyRequest({ id: edit.id, name: edit.name, symbol: edit.symbol }));
+      setEdit(null);
+      setSnack({ open: true, message: 'Cryptocurrency updated' });
+    }
+  };
+
+  const handleDelete = id => {
+    if (window.confirm('Delete this cryptocurrency?')) {
+      dispatch(deleteCryptocurrencyRequest(id));
+      setSnack({ open: true, message: 'Cryptocurrency deleted' });
+    }
   };
 
   const startEdit = c => setEdit({ ...c });
@@ -69,7 +81,7 @@ const Cryptocurrencies = () => {
                 <TableCell>{row.symbol}</TableCell>
                 <TableCell>
                   <Button size="small" onClick={() => startEdit(row)}>Edit</Button>
-                  <Button size="small" color="error" onClick={() => dispatch(deleteCryptocurrencyRequest(row.id))}>Delete</Button>
+                  <Button size="small" color="error" onClick={() => handleDelete(row.id)}>Delete</Button>
                 </TableCell>
               </TableRow>
             ))}
@@ -105,6 +117,12 @@ const Cryptocurrencies = () => {
           </>
         )}
       </Dialog>
+      <Snackbar
+        open={snack.open}
+        autoHideDuration={3000}
+        onClose={() => setSnack({ ...snack, open: false })}
+        message={snack.message}
+      />
     </>
   );
 };
