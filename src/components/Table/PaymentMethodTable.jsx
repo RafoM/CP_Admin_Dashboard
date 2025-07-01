@@ -28,8 +28,8 @@ const PaymentMethodTable = ({ rows = [], page, rowsPerPage, onPageChange, onRows
           {paginatedRows.map(row => (
             <TableRow key={row.id} hover>
               <TableCell>{row.id}</TableCell>
-              <TableCell>{row.blockchain?.name}</TableCell>
-              <TableCell>{row.crypto?.name}</TableCell>
+              <TableCell>{row.Blockchain?.name}</TableCell>
+              <TableCell>{row.Crypto?.name}</TableCell>
               <TableCell>{row.status}</TableCell>
               <TableCell>
                 <Button size="small" disabled>Edit</Button>
