@@ -11,9 +11,6 @@ import {
   updateCryptocurrencyRequest,
   deleteCryptocurrencyRequest,
   setCryptocurrencies,
-  addCryptocurrency,
-  modifyCryptocurrency,
-  removeCryptocurrency,
   setCryptocurrenciesError,
 } from '../redux/slices/cryptocurrenciesSlice';
 import { setLoading } from '../redux/slices/uiSlice';
@@ -33,8 +30,9 @@ function* handleFetchCryptocurrencies() {
 function* handleCreateCryptocurrency(action) {
   try {
     yield put(setLoading(true));
-    const { data } = yield call(createCryptocurrency, action.payload);
-    yield put(addCryptocurrency(data));
+    yield call(createCryptocurrency, action.payload);
+    const { data } = yield call(getCryptocurrencies);
+    yield put(setCryptocurrencies(data));
   } catch (err) {
     yield put(setCryptocurrenciesError(err.message));
   } finally {
@@ -45,8 +43,9 @@ function* handleCreateCryptocurrency(action) {
 function* handleUpdateCryptocurrency(action) {
   try {
     yield put(setLoading(true));
-    const { data } = yield call(updateCryptocurrency, action.payload);
-    yield put(modifyCryptocurrency(data));
+    yield call(updateCryptocurrency, action.payload);
+    const { data } = yield call(getCryptocurrencies);
+    yield put(setCryptocurrencies(data));
   } catch (err) {
     yield put(setCryptocurrenciesError(err.message));
   } finally {
@@ -58,7 +57,8 @@ function* handleDeleteCryptocurrency(action) {
   try {
     yield put(setLoading(true));
     yield call(deleteCryptocurrency, action.payload);
-    yield put(removeCryptocurrency(action.payload));
+    const { data } = yield call(getCryptocurrencies);
+    yield put(setCryptocurrencies(data));
   } catch (err) {
     yield put(setCryptocurrenciesError(err.message));
   } finally {
