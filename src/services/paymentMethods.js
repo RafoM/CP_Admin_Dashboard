@@ -1,8 +1,5 @@
 import api from './api';
 
-export const getPaymentMethods = params =>
-  api.get('/admin/payment-methods', { params });
-
 export const createPaymentMethod = payload =>
   api.post('/payment-methods', payload);
 
