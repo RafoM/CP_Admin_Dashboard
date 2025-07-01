@@ -11,9 +11,6 @@ import {
   updatePaymentMethodRequest,
   deletePaymentMethodRequest,
   setPaymentMethods,
-  addPaymentMethod,
-  modifyPaymentMethod,
-  removePaymentMethod,
   setPaymentMethodsError,
 } from '../redux/slices/paymentMethodsSlice';
 import { setLoading } from '../redux/slices/uiSlice';
@@ -38,8 +35,9 @@ function* handleFetchPaymentMethods(action) {
 function* handleCreatePaymentMethod(action) {
   try {
     yield put(setLoading(true));
-    const { data } = yield call(createPaymentMethod, action.payload);
-    yield put(addPaymentMethod(data));
+    yield call(createPaymentMethod, action.payload);
+    const { data } = yield call(getPaymentMethods, {});
+    yield put(setPaymentMethods(data));
   } catch (err) {
     yield put(setPaymentMethodsError(err.message));
   } finally {
@@ -50,8 +48,9 @@ function* handleCreatePaymentMethod(action) {
 function* handleUpdatePaymentMethod(action) {
   try {
     yield put(setLoading(true));
-    const { data } = yield call(updatePaymentMethod, action.payload);
-    yield put(modifyPaymentMethod(data));
+    yield call(updatePaymentMethod, action.payload);
+    const { data } = yield call(getPaymentMethods, {});
+    yield put(setPaymentMethods(data));
   } catch (err) {
     yield put(setPaymentMethodsError(err.message));
   } finally {
@@ -63,7 +62,8 @@ function* handleDeletePaymentMethod(action) {
   try {
     yield put(setLoading(true));
     yield call(deletePaymentMethod, action.payload);
-    yield put(removePaymentMethod(action.payload));
+    const { data } = yield call(getPaymentMethods, {});
+    yield put(setPaymentMethods(data));
   } catch (err) {
     yield put(setPaymentMethodsError(err.message));
   } finally {
