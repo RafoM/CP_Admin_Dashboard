@@ -9,7 +9,15 @@ import Paper from '@mui/material/Paper';
 import TablePagination from '@mui/material/TablePagination';
 import Button from '@mui/material/Button';
 
-const PaymentMethodTable = ({ rows = [], page, rowsPerPage, onPageChange, onRowsPerPageChange }) => {
+const PaymentMethodTable = ({
+  rows = [],
+  page,
+  rowsPerPage,
+  onPageChange,
+  onRowsPerPageChange,
+  onEdit,
+  onDelete,
+}) => {
   const paginatedRows = rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
@@ -32,8 +40,12 @@ const PaymentMethodTable = ({ rows = [], page, rowsPerPage, onPageChange, onRows
               <TableCell>{row.Crypto?.name}</TableCell>
               <TableCell>{row.status}</TableCell>
               <TableCell>
-                <Button size="small" disabled>Edit</Button>
-                <Button size="small" color="error" disabled>
+                <Button size="small" onClick={() => onEdit?.(row)}>Edit</Button>
+                <Button
+                  size="small"
+                  color="error"
+                  onClick={() => onDelete?.(row.id)}
+                >
                   Delete
                 </Button>
               </TableCell>
