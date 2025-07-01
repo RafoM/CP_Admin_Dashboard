@@ -8,6 +8,7 @@ import Topbar from './Topbar';
 import Dashboard from '../pages/Dashboard';
 import Users from '../pages/Users';
 import Payments from '../pages/Payments';
+import PaymentMethods from '../pages/PaymentMethods/PaymentMethods';
 import Referrals from '../pages/Referrals';
 import Settings from '../pages/Settings';
 import Mnemonics from '../pages/Mnemonics';
@@ -29,6 +30,7 @@ const Layout = () => {
           <Route path="/" element={<Dashboard />} />
           <Route path="/users" element={<Users />} />
           <Route path="/payments" element={<Payments />} />
+          <Route path="/payment-methods" element={<PaymentMethods />} />
           <Route path="/referrals" element={<Referrals />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/mnemonics" element={<Mnemonics />} />
