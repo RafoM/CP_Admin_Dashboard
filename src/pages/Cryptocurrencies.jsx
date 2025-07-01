@@ -14,9 +14,9 @@ import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
+import AddCryptoModal from '../components/modals/AddCryptoModal';
 import {
   fetchCryptocurrenciesRequest,
-  createCryptocurrencyRequest,
   updateCryptocurrencyRequest,
   deleteCryptocurrencyRequest,
 } from '../redux/slices/cryptocurrenciesSlice';
@@ -25,20 +25,15 @@ const Cryptocurrencies = () => {
   const dispatch = useDispatch();
   const { list } = useSelector(state => state.cryptocurrencies);
   const loading = useSelector(state => state.ui.loading);
-  const [name, setName] = useState('');
-  const [symbol, setSymbol] = useState('');
+  const [open, setOpen] = useState(false);
   const [edit, setEdit] = useState(null);
 
   useEffect(() => {
     dispatch(fetchCryptocurrenciesRequest());
   }, [dispatch]);
 
-  const handleCreate = e => {
-    e.preventDefault();
-    dispatch(createCryptocurrencyRequest({ name, symbol }));
-    setName('');
-    setSymbol('');
-  };
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const handleUpdate = () => {
     if (!edit) return;
@@ -51,11 +46,9 @@ const Cryptocurrencies = () => {
   return (
     <>
       <Typography variant="h4" gutterBottom>Cryptocurrencies</Typography>
-      <form onSubmit={handleCreate} style={{ marginBottom: '1rem' }}>
-        <TextField label="Name" value={name} onChange={e => setName(e.target.value)} size="small" sx={{ mr: 1 }} />
-        <TextField label="Symbol" value={symbol} onChange={e => setSymbol(e.target.value)} size="small" sx={{ mr: 1 }} />
-        <Button variant="contained" type="submit" disabled={loading}>Add</Button>
-      </form>
+      <Button variant="contained" onClick={handleOpen} sx={{ mb: 2 }} disabled={loading}>
+        Add
+      </Button>
       <TableContainer component={Paper}>
         <Table size="small">
           <TableHead>
@@ -81,6 +74,8 @@ const Cryptocurrencies = () => {
           </TableBody>
         </Table>
       </TableContainer>
+
+      <AddCryptoModal open={open} onClose={handleClose} />
 
       <Dialog open={!!edit} onClose={() => setEdit(null)}>
         <DialogTitle>Edit Cryptocurrency</DialogTitle>

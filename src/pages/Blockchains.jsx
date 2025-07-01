@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Typography from '@mui/material/Typography';
-import TextField from '@mui/material/TextField';
 import Switch from '@mui/material/Switch';
 import Button from '@mui/material/Button';
 import Table from '@mui/material/Table';
@@ -15,9 +14,9 @@ import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
+import AddBlockchainModal from '../components/modals/AddBlockchainModal';
 import {
   fetchBlockchainsRequest,
-  createBlockchainRequest,
   updateBlockchainRequest,
   deleteBlockchainRequest,
 } from '../redux/slices/blockchainsSlice';
@@ -26,20 +25,15 @@ const Blockchains = () => {
   const dispatch = useDispatch();
   const { list } = useSelector(state => state.blockchains);
   const loading = useSelector(state => state.ui.loading);
-  const [name, setName] = useState('');
-  const [walletSupported, setWalletSupported] = useState(false);
+  const [open, setOpen] = useState(false);
   const [edit, setEdit] = useState(null);
 
   useEffect(() => {
     dispatch(fetchBlockchainsRequest());
   }, [dispatch]);
 
-  const handleCreate = e => {
-    e.preventDefault();
-    dispatch(createBlockchainRequest({ name, wallet_generation_supported: walletSupported }));
-    setName('');
-    setWalletSupported(false);
-  };
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const handleUpdate = () => {
     if (!edit) return;
@@ -52,11 +46,9 @@ const Blockchains = () => {
   return (
     <>
       <Typography variant="h4" gutterBottom>Blockchains</Typography>
-      <form onSubmit={handleCreate} style={{ marginBottom: '1rem' }}>
-        <TextField label="Name" value={name} onChange={e => setName(e.target.value)} size="small" sx={{ mr: 1 }} />
-        <Switch checked={walletSupported} onChange={e => setWalletSupported(e.target.checked)} />
-        <Button variant="contained" type="submit" disabled={loading}>Add</Button>
-      </form>
+      <Button variant="contained" onClick={handleOpen} sx={{ mb: 2 }} disabled={loading}>
+        Add
+      </Button>
       <TableContainer component={Paper}>
         <Table size="small">
           <TableHead>
@@ -82,6 +74,8 @@ const Blockchains = () => {
           </TableBody>
         </Table>
       </TableContainer>
+
+      <AddBlockchainModal open={open} onClose={handleClose} />
 
       <Dialog open={!!edit} onClose={() => setEdit(null)}>
         <DialogTitle>Edit Blockchain</DialogTitle>
