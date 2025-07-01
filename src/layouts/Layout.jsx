@@ -10,6 +10,8 @@ import Users from '../pages/Users';
 import Payments from '../pages/Payments';
 import Referrals from '../pages/Referrals';
 import Settings from '../pages/Settings';
+import Mnemonics from '../pages/Mnemonics';
+import Blockchains from '../pages/Blockchains';
 import './Layout.scss';
 
 const drawerWidth = 240;
@@ -28,6 +30,8 @@ const Layout = () => {
           <Route path="/payments" element={<Payments />} />
           <Route path="/referrals" element={<Referrals />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/mnemonics" element={<Mnemonics />} />
+          <Route path="/blockchains" element={<Blockchains />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         <Outlet />
