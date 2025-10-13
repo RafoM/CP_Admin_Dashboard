@@ -13,6 +13,7 @@ import PaymentIcon from '@mui/icons-material/Payment';
 import ShareIcon from '@mui/icons-material/Share';
 import SettingsIcon from '@mui/icons-material/Settings';
 import CurrencyBitcoinIcon from '@mui/icons-material/CurrencyBitcoin';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import './Sidebar.scss';
 
 const drawerWidth = 240;
@@ -27,6 +28,7 @@ const navItems = [
   { to: '/blockchains', label: 'Blockchains', icon: <PaymentIcon /> },
   { to: '/cryptocurrencies', label: 'Cryptocurrencies', icon: <CurrencyBitcoinIcon /> },
   { to: '/payment-methods', label: 'Payment Methods', icon: <PaymentIcon /> },
+  { to: '/wallets', label: 'Wallets', icon: <AccountBalanceWalletIcon /> },
 ];
 
 const Sidebar = () => (

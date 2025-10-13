@@ -14,6 +14,7 @@ import Settings from '../pages/Settings';
 import Mnemonics from '../pages/Mnemonics';
 import Blockchains from '../pages/Blockchains';
 import Cryptocurrencies from '../pages/Cryptocurrencies';
+import Wallets from '../pages/Wallets';
 import './Layout.scss';
 
 const drawerWidth = 240;
@@ -36,6 +37,7 @@ const Layout = () => {
           <Route path="/blockchains" element={<Blockchains />} />
           <Route path="/cryptocurrencies" element={<Cryptocurrencies />} />
           <Route path="/payment-methods" element={<PaymentMethods />} />
+          <Route path="/wallets" element={<Wallets />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         <Outlet />
