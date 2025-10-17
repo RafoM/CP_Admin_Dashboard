@@ -15,7 +15,9 @@ import { fetchWalletsRequest } from '../redux/slices/walletsSlice';
 
 const Wallets = () => {
   const dispatch = useDispatch();
-  const { list } = useSelector(state => state.wallets);
+  const walletsState = useSelector(state => state.wallets);
+  const { list = [], error } = walletsState || {};
+  const wallets = Array.isArray(list) ? list : [];
   const loading = useSelector(state => state.ui.loading);
   const [open, setOpen] = useState(false);
 
@@ -33,6 +35,11 @@ const Wallets = () => {
       <Button variant="contained" onClick={handleOpen} sx={{ mb: 2 }} disabled={loading}>
         Add Wallet
       </Button>
+      {error && (
+        <Typography color="error" sx={{ mb: 2 }}>
+          {error}
+        </Typography>
+      )}
       <TableContainer component={Paper}>
         <Table size="small">
           <TableHead>
@@ -46,7 +53,7 @@ const Wallets = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {list.map(wallet => (
+            {wallets.map(wallet => (
               <TableRow key={`${wallet.id}-${wallet.wallet_index}`} hover>
                 <TableCell>{wallet.id}</TableCell>
                 <TableCell>{wallet.mnemonic_id}</TableCell>
